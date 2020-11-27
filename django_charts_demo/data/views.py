@@ -15,6 +15,12 @@ class Dashboard(TemplateView):
         # get the data from the default method
         context = super().get_context_data(**kwargs)
 
+        # changed by Xuehua to load the data from csv file into 
+        # database when there was no data in the database for the 
+        # first time. 
+        if Purchase.objects.count()==0:
+            csv_to_db();
+
         # the fields we will use
         # df_fields = ['city', 'customer_type', 'gender', 'unit_price', 'quantity', 
         #     'product_line', 'tax', 'total' , 'date', 'time', 'payment', 
